@@ -1,4 +1,5 @@
 // https://weatherstack.com/quickstart
+// https://account.mapbox.com/
 
 const request = require('request')
 const location = 'Belo Horizonte'
