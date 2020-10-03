@@ -2,21 +2,29 @@
 // https://account.mapbox.com/
 
 const request = require('request')
-const geocode = require('./utils/geocode')
-const forecast = require('./utils/forecast')
+const geocode = require('./utils/geocode.js')
+const forecast = require('./utils/forecast.js')
 
-const location = 'Belo Horizonte'
+const location = process.argv[2]
 
-// Forecast
+if (!location) {
+    console.log('Please provide a location!')
+} else {
+    geocode.geocode(location, (error, { lat, long, name }) => {
+        if (error) {
+            return console.log(error)
+        }
 
-forecast.forecast(-19.917, -43.933, (error, data) => {
-    console.log('Error: ', error)
-    console.log('Data: ', data)
-})
+        forecast.forecast(lat, long, (error, forecastData) => {
+            console.log(lat)
+            console.log(long)
 
-// Geocoding
+            if (error) {
+                return console.log(error)
+            }
 
-geocode.geocode(location, (error, data) => {
-    console.log('Error: ', error)
-    console.log('Data: ', data)
-})
+            console.log(name)
+            console.log(forecastData)
+        })
+    })
+}
