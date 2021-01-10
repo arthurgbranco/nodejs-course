@@ -16,14 +16,12 @@ if (!location) {
         }
 
         forecast.forecast(lat, long, (error, forecastData) => {
-            console.log(lat)
-            console.log(long)
-
             if (error) {
                 return console.log(error)
             }
 
             console.log(name)
+            console.log(lat + ', ' + long)
             console.log(forecastData)
         })
     })
